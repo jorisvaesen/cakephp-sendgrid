@@ -1,0 +1,32 @@
+{
+  "name": "jorisvaesen/cakephp-sendgrid",
+  "description": "Sendgrid wrapper for CakePHP",
+  "type": "cakephp-plugin",
+  "keywords": ["cakephp", "sendgrid"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joris Vaesen",
+      "role": "Author"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.16",
+    "cakephp/cakephp": "~3.6",
+    "sendgrid/sendgrid": "~7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "cakephp/cakephp-codesniffer": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "JorisVaesen\\Sendgrid\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "JorisVaesen\\Sendgrid\\Test\\": "tests"
+    }
+  }
+}
