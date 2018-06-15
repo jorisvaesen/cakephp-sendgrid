@@ -1,10 +1,8 @@
 <?php
 
-    use Cake\Core\Configure;
+    use Cake\Mailer\Email;
 
-    if (!Configure::check('EmailTransport.sendgrid')) {
-        Configure::write('EmailTransport.sendgrid', [
-            'className' => '\JorisVaesen\Sendgrid\Mailer\Transport\SendgridTransport',
-            'password' => env('SENDGRID_API_KEY', null),
-        ]);
-    }
+    Email::setConfigTransport('sendgrid', [
+        'className' => '\JorisVaesen\Sendgrid\Mailer\Transport\SendgridTransport',
+        'password' => env('SENDGRID_API_KEY', null),
+    ]);
