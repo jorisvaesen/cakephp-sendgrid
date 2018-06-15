@@ -40,12 +40,18 @@ class SendgridTransport extends AbstractTransport
             $sendgridEmail->addHeader('Sender', sprintf('%s <%s>', $n, $e));
         }
 
-        $sendgridEmail->setSubject($email->getSubject());
-        $sendgridEmail->addContent('text/plain', $email->message(Email::MESSAGE_TEXT));
-        $sendgridEmail->addContent('text/html', $email->message(Email::MESSAGE_HTML));
-
         foreach ($email->getAttachments() as $attachment) {
             $sendgridEmail->addAttachment($attachment['file'], $attachment['custom_filename']);
+        }
+
+        $sendgridEmail->setSubject($email->getSubject());
+
+        if ($email->getEmailFormat() === 'both' || $email->getEmailFormat() === 'html') {
+            $sendgridEmail->addContent('text/html', $email->message(Email::MESSAGE_HTML));
+        }
+
+        if ($email->getEmailFormat() === 'both' || $email->getEmailFormat() === 'text') {
+            $sendgridEmail->addContent('text/plain', $email->message(Email::MESSAGE_TEXT));
         }
 
         return $sendgridEmail;
