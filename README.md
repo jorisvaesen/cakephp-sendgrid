@@ -25,7 +25,16 @@ The plugin loads from dotenv the following:
 SENDGRID_API_KEY="your_sendgrid_api_key"
 ```
 
-### Method 2 (hardcoded)
+### Method 2 (using app.php)
+
+Set the sendgrid api key in app.php:
+```
+'Sendgrid' => [
+    'apiKey' => 'your_sendgrid_api_key',
+],
+```
+
+### Method 3 (hardcoded)
 
 Add in your __app.php__ file, in the __EmailTransport__ item
 
