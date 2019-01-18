@@ -83,6 +83,8 @@ If you want to use Sendgrid API methods which do not have a CakePHP equivalent, 
 
 ```
 $email = new Email('default');
+$email->viewBuilder()->setLayout('default);
+/* @var \Sendgrid\Response $response */
 $response = $email
     ->setProfile('sendgrid')    // optional when you've set sendgrid as the default transport in configuration
     ->setEmailFormat('html')
@@ -92,7 +94,8 @@ $response = $email
     ->setTo('to@example.com', 'Example To')
     ->setSubject('Sample email')
     ->setTemplate('default')
-    ->setLayout('default')
     ->setViewVars([])
     ->send();
+    
+return ($response->statusCode() >= 200 && $resposne->statusCode() <= 299);
 ```
