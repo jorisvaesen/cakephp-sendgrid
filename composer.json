@@ -11,8 +11,8 @@
     }
   ],
   "require": {
-    "php": ">=5.4.16",
-    "cakephp/cakephp": "~3.6",
+    "php": ">=7.0.0",
+    "cakephp/cakephp": "3.7.*",
     "sendgrid/sendgrid": "~7.0"
   },
   "require-dev": {
