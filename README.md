@@ -97,5 +97,7 @@ $response = $email
     ->setViewVars([])
     ->send();
     
-return ($response->statusCode() >= 200 && $resposne->statusCode() <= 299);
+return $response->statusCode() === 202;
 ```
+
+[www.datrix.be](https://www.datrix.be)
