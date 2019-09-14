@@ -4,6 +4,8 @@ namespace JorisVaesen\Sendgrid\Mailer\Transport;
 
 use Cake\Mailer\AbstractTransport;
 use Cake\Mailer\Email;
+use Cake\Utility\Hash;
+use SendGrid\Mail\Attachment;
 
 class SendgridTransport extends AbstractTransport
 {
@@ -40,8 +42,29 @@ class SendgridTransport extends AbstractTransport
             $sendgridEmail->addHeader('Sender', sprintf('%s <%s>', $n, $e));
         }
 
-        foreach ($email->getAttachments() as $attachment) {
-            $sendgridEmail->addAttachment($attachment['file'], $attachment['custom_filename']);
+        foreach ($email->getAttachments() as $name => $info) {
+            $attachment = new Attachment();
+            $attachment->setFilename($name);
+
+            if (isset($info['data'])) {
+                $attachment->setContent(base64_decode($info['data']));
+            }
+
+            if (isset($info['file'])) {
+                $attachment->setContent(file_get_contents($info['file']));
+            }
+
+            $contentId = Hash::get($info, 'contentId');
+            if ($contentId) {
+                $attachment->setContentID($contentId);
+            }
+
+            $type = Hash::get($info, 'mimetype');
+            if ($type) {
+                $attachment->setType($type);
+            }
+
+            $sendgridEmail->addAttachment($attachment);
         }
 
         $sendgridEmail->setSubject($email->getSubject());
